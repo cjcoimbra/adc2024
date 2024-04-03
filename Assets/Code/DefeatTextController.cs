@@ -17,8 +17,12 @@ public class DefeatTextController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
-        
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     IEnumerator UpdateTextWithDelayEffect() {

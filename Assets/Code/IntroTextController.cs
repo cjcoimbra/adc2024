@@ -20,9 +20,12 @@ public class IntroTextController : MonoBehaviour
         StartCoroutine(UpdateTextWithDelayEffect());
     }
 
-    // Update is called once per frame
-    void Update() {
-        
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     IEnumerator UpdateTextWithDelayEffect() {

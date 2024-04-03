@@ -21,6 +21,12 @@ public class EndTextController : MonoBehaviour {
         StartCoroutine(UpdateTextWithDelayEffect());
     }
 
+    void Update() {
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            Application.Quit();
+        }
+    }
+
     IEnumerator UpdateTextWithDelayEffect() {
         for(int line = 0; line < introLines.Length; line++) {
             for (int character = 0; character < introLines[line].Length; character++) {

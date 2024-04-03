@@ -118,6 +118,8 @@ public class GridMovement : MonoBehaviour {
                 RaycastAgainstTargetGameObject(target);
             }
             Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 100.0f, Color.yellow);
+        } else if (Input.GetKeyUp(KeyCode.Escape)) {
+            Application.Quit();
         }
         return false;
     }
@@ -125,6 +127,7 @@ public class GridMovement : MonoBehaviour {
     private void RaycastAgainstTargetGameObject(GameObject target) {
         if (target.tag == "door" && IsInFrontOfTarget(target.transform.position)) {
             messageController.ReceiveMessage("Opening door - standby");
+            target.GetComponent<BoxCollider>().enabled = false;        
             audioManager.PlayDoorOpen();
             target.GetComponent<DoorController>().RequestToggleDoor(true, cameraTransform.rotation.eulerAngles.y, target.transform.position);
             gridManager.ReportPartyTurnOver(gridPosition);
@@ -142,6 +145,7 @@ public class GridMovement : MonoBehaviour {
             UseMedkit();
             target.SetActive(false);
         } else if (target.tag == "terminal" && !acquiredResearchBackup) {
+            audioManager.PlayTerminal();
             messageController.ReceiveMessage("Research backup files acquired");
             messageController.ReceiveMessage("Proceed to extraction");
             acquiredResearchBackup = true;
@@ -279,6 +283,7 @@ public class GridMovement : MonoBehaviour {
     }
 
     private void UseMedkit() {
+        audioManager.PlayMedkit();
         int restoredHP = Random.Range(5, 21);
         hitPoints += restoredHP;
         if (hitPoints >= maxHitPoints) {

@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour {
     public AudioSource enemyDeath;
     public AudioSource door;
     public AudioSource footsteps;
+    public AudioSource medkit;
+    public AudioSource terminal;
     // Start is called before the first frame update
     void Start() {
         audio.Play();
@@ -28,6 +30,16 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayDoorOpen() {
         door.Play();
+    }
+
+    public void PlayTerminal()
+    {
+        terminal.Play();
+    }
+
+    public void PlayMedkit()
+    {
+        medkit.Play();
     }
 
     public void PlayFootsteps() {
